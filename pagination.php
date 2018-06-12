@@ -11,6 +11,18 @@
    $initial_set_end = $total_rows - 10;
    $news_data       = '';
 
+   // Create dynamic page numbers -> call function where you want the page numbers to go
+   function getPageNumber() {
+      for($i = 0; $i < $total_rows[0]; $i++) {
+         if ($i > 0) {
+            if ($i % 10 === 0) {
+               $page_number = $i / 10;
+               echo '<p data-page-number=' . $page_number . '>' . $page_number . '</p>';
+            }
+         }
+      }
+   }
+
    // First page
    if ((int)$_POST["page_number"] === 1) {
       $query = "SELECT * FROM TABLE WHERE ID BETWEEN $initial_set_end AND $total_rows ORDER BY news_id DESC";
